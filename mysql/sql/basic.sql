@@ -46,3 +46,29 @@ UPDATE member2 SET
 	, birthday = "1993-02-10"
 WHERE mmseSeq = 1;
 
+-- Where
+SELECT * FROM member
+WHERE 1=1
+-- AND member_nickname like 'do%'
+-- AND member_nickname like '%on'
+-- 사이 검색이 가장 많이 쓰임.
+AND member_bod like '%02%'
+;    
+
+SELECT * FROM member
+WHERE 1=1
+-- AND mmSeq = 2
+-- AND mmSeq > 1
+-- AND mmSeq >= 3
+AND mmSeq Between 4 and 9
+;
+
+SELECT * FROM member
+WHERE 1=1
+-- AND member_zip is null
+-- AND career = null 에러, is로 해줘야 함. 
+AND member_detailed = ""
+;
+
+
+
