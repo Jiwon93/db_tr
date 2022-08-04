@@ -4,7 +4,7 @@ select * from member;
 
 select count(*) from member;
 
-SELECT
+SELECT 
 	a.mmSeq
     ,a.mmName
     ,a.mmAddress1
