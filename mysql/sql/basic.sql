@@ -213,6 +213,80 @@ CREATE TABLE IF NOT EXISTS `espresso`.`inquiry` (
 ENGINE = InnoDB
 ;
 
+CREATE TABLE IF NOT EXISTS `espresso`.`member_specialDetail` (
+  `mmsdSeq` INT NOT NULL,
+  `mmsdSpecial` TINYINT NULL,
+  `mmsdDetail` TINYINT NULL,
+  `member_mmSeq` INT NOT NULL,
+  PRIMARY KEY (`mmsdSeq`),
+  INDEX `fk_member_sepcial_member1_idx` (`member_mmSeq` ASC) VISIBLE,
+  CONSTRAINT `fk_member_sepcial_member1`
+    FOREIGN KEY (`member_mmSeq`)
+    REFERENCES `espresso`.`member` (`mmSeq`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+;
+
+CREATE TABLE IF NOT EXISTS `espresso`.`member_school` (
+  `mmshSeq` INT NOT NULL,
+  `mmshSchool` TINYINT NULL,
+  `mmshMajor` TINYINT NULL,
+  `mmshState` TINYINT NULL,
+  `member_mmSeq` INT NOT NULL,
+  PRIMARY KEY (`mmshSeq`),
+  INDEX `fk_member_school_member1_idx` (`member_mmSeq` ASC) VISIBLE,
+  CONSTRAINT `fk_member_school_member1`
+    FOREIGN KEY (`member_mmSeq`)
+    REFERENCES `espresso`.`member` (`mmSeq`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+;
+
+CREATE TABLE IF NOT EXISTS `espresso`.`member_technique` (
+  `mmtqSeq` INT NOT NULL,
+  `mmtqSpecial` TINYINT NULL,
+  `mmtqDetail` TINYINT NULL,
+  `member_mmSeq` INT NOT NULL,
+  PRIMARY KEY (`mmtqSeq`),
+  INDEX `fk_member_technique_member1_idx` (`member_mmSeq` ASC) VISIBLE,
+  CONSTRAINT `fk_member_technique_member1`
+    FOREIGN KEY (`member_mmSeq`)
+    REFERENCES `espresso`.`member` (`mmSeq`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+;
+
+CREATE TABLE IF NOT EXISTS `espresso`.`member_certificate` (
+  `mmcfSeq` INT NOT NULL,
+  `mmcfDiv` TINYINT NULL,
+  `member_mmSeq` INT NOT NULL,
+  PRIMARY KEY (`mmcfSeq`),
+  INDEX `fk_member_certificate_member1_idx` (`member_mmSeq` ASC) VISIBLE,
+  CONSTRAINT `fk_member_certificate_member1`
+    FOREIGN KEY (`member_mmSeq`)
+    REFERENCES `espresso`.`member` (`mmSeq`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+;
+
+CREATE TABLE IF NOT EXISTS `espresso`.`member_WorkTime` (
+  `mmwtSeq` INT NOT NULL,
+  `mmwtDiv` VARCHAR(45) NULL,
+  `member_mmSeq` INT NOT NULL,
+  PRIMARY KEY (`mmwtSeq`),
+  INDEX `fk_member_WorkTime_member1_idx` (`member_mmSeq` ASC) VISIBLE,
+  CONSTRAINT `fk_member_WorkTime_member1`
+    FOREIGN KEY (`member_mmSeq`)
+    REFERENCES `espresso`.`member` (`mmSeq`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+;
+
 CREATE TABLE IF NOT EXISTS `espresso`.`CCG` (
   `CCGSeq` INT NOT NULL AUTO_INCREMENT,
   `ccgName` VARCHAR(45) NULL,

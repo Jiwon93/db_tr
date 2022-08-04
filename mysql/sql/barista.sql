@@ -1,5 +1,6 @@
 use espresso;
 
+-- 어떤 조건을 할지에 따라 마스터 table 설정을 잘 해야함. 
 -- 코드그룹:코드
 SELECT
 	c.ccgSeq
