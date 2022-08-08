@@ -3,18 +3,20 @@ use espresso;
 -- 어떤 조건을 할지에 따라 마스터 table 설정을 잘 해야함. 
 -- 코드그룹:코드
 SELECT
-	c.ccgSeq
-    ,c.ccgName
-    ,d.ccSeq
-    ,d.ccName
-FROM codeGroup c
-inner join code d on d.codeGroup_ccgSeq = c.ccgSeq
+	a.ccgSeq
+    ,a.ccgName
+    ,b.ccSeq
+    ,b.ccName
+FROM codeGroup a
+inner join code b on b.codeGroup_ccgSeq = a.ccgSeq
 ;
 
 -- 로그인
-SELECT * 
+SELECT 
+	mmEmail
+    ,mmPw
 FROM member 
-WHERE mmEmail = "jihun@naver.com" and mmPw = "jihun123"
+WHERE mmEmail = "" and mmPw = ""
 ;
 
 -- 이메일 찾기
@@ -40,15 +42,60 @@ SELECT mmEmail FROM member WHERE mmEmail = "";
 -- 닉네임 중복확인
 SELECT mmNickname FROM member WHERE mmNickname = "";
 
--- 생일자 정보확인
+-- 검색창
+
+-- 마이페이지(일반회원)
 SELECT 
-	mmName
-    ,mmBod
-FROM member 
-WHERE mmName = "" and mmBod = ""
+	a.mmNickname
+    ,a.mmEmail
+    ,b.mmpPhoneNumber
+    ,a.mmBod
+    ,a.mmGender
+    ,a.mmAddress1
+    ,a.mmAddress2
+    ,a.mmJob
+    ,a.mmInterest
+FROM member a
+INNER JOIN member_phone b on a.mmSeq = b.member_mmSeq
+WHERE a.mmEmail = "" AND a.mmRank = "26"
 ;
 
--- 
+-- 마이페이지(판매자)
+SELECT 
+	a.mmNickname
+    ,a.mmEmail
+    ,b.mmpPhoneNumber
+    ,a.mmBod
+    ,a.mmGender
+    ,a.mmAddress1
+    ,a.mmAddress2
+    ,a.mmJob
+    ,a.mmInterest
+    ,a.mmSpecial
+    ,a.mmDetail
+    ,a.mmTechnique
+    ,a.mmCareer
+    ,a.mmSchool
+    ,a.mmSchoolMajor
+    ,a.mmSchoolState
+    ,a.mmCertificate
+    ,a.mmWishPay
+    ,a.mmWorkTime
+    ,a.mmIntroduce
+FROM member a
+INNER JOIN member_phone b on a.mmSeq = b.member_mmSeq
+WHERE a.mmEmail = "" AND a.mmRank = "25"
+;
+
+-- 비밀번호 변경
+SELECT mmPw FROM mmPw
+WHERE mmPw = ""
+;
+
+UPDATE member SET
+	mmPw = ""
+WHERE mmPw = ""
+;
 
 -- 목록
 
