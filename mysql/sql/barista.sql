@@ -16,8 +16,38 @@ SELECT
 	mmEmail
     ,mmPw
 FROM member 
-WHERE mmEmail = "" and mmPw = ""
+WHERE mmEmail = "dongsu@naver.com" and mmPw = "dongsu123"
 ;
+
+-- 메인(인기 top4)
+
+-- 후기(top3)
+
+-- 판매자 인터뷰(top3)
+
+-- 상품 목록 페이지
+SELECT 
+	a.itemSeq
+	,a.itMainImg
+	,b.mmNickname
+    ,a.itMain
+    ,a.basicPrice
+    ,(SELECT ROUND(AVG(reGrade)/2, 1) FROM review WHERE item_itemseq = "1") AS reviewAvgGrade
+    ,(SELECT COUNT(item_itemseq) FROM review WHERE item_itemseq = "1") AS reviewCount
+FROM item a
+INNER JOIN member b ON a.member_mmSeq = b.mmSeq
+INNER JOIN review c ON a.itemSeq = c.item_itemseq
+WHERE 1=1
+AND a.itemSeq = "1"
+GROUP BY a.itemSeq
+;
+
+-- 구매 내역
+SELECT 
+
+FROM
+
+WHERE
 
 -- 이메일 찾기
 SELECT a.mmEmail
