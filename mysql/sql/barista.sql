@@ -87,7 +87,6 @@ WHERE 1=1
 AND a.itemSeq = "1"
 ;
 
-
 -- 구매 내역
 
 
