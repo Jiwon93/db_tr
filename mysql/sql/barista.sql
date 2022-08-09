@@ -5,7 +5,7 @@ use espresso;
 SELECT
 	a.ccgSeq
     ,a.ccgName
-    ,b.ccSeq
+    ,b.ccSeqcode
     ,b.ccName
 FROM codeGroup a
 inner join code b on b.codeGroup_ccgSeq = a.ccgSeq
@@ -42,12 +42,54 @@ AND a.itemSeq = "1"
 GROUP BY a.itemSeq
 ;
 
+-- 상품상세페이지
+SELECT
+	a.breadcrumb
+    ,a.itMainImg
+	,(SELECT ROUND(AVG(reGrade)/2, 1) FROM review WHERE item_itemseq = "1") AS reviewAvgGrade
+    ,(SELECT COUNT(item_itemseq) FROM review WHERE item_itemseq = "1") AS reviewCount
+    ,a.itServiceDetail
+    ,a.basicPrice
+    ,a.basicDetail
+    ,a.basicBenefit
+    ,a.basicPeriod
+    ,a.bestPrice
+    ,a.bestDetail
+    ,a.bestBenefit
+    ,a.bestPeriod
+    ,a.proPrice
+    ,a.proDetail
+    ,a.proBenefit
+    ,a.proPeriod
+    ,a.itCancleRefund
+    ,(SELECT ROUND(AVG(reGrade)/2, 1) FROM review WHERE item_itemseq = "1") AS reviewAvgGrade
+    ,(SELECT COUNT(item_itemseq) FROM review WHERE item_itemseq = "1") AS reviewCount
+    ,a.itInquiry
+FROM item a
+INNER JOIN member b on a.member_mmSeq = b.mmSeq
+INNER JOIN review c on a.itemSeq = c.item_itemseq
+WHERE 1=1
+AND a.itemSeq = "1"
+GROUP BY a.itemSeq
+;	
+
+-- 상품 후기
+SELECT
+    b.reNickname
+    ,b.reGrade
+    ,b.reWriteTime
+    ,b.reContent
+    ,b.reWorkload
+    ,b.reOrderPrice
+FROM item a
+INNER JOIN review b on a.itemSeq = b.item_itemseq
+WHERE 1=1
+AND a.itemSeq = "1"
+;
+
+
 -- 구매 내역
-SELECT 
 
-FROM
-
-WHERE
 
 -- 이메일 찾기
 SELECT a.mmEmail
