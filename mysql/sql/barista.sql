@@ -20,6 +20,10 @@ WHERE mmEmail = "dongsu@naver.com" and mmPw = "dongsu123"
 ;
 
 -- 메인(인기 top4)
+SELECT 
+
+FROM purchase a
+ORDER BY FIELD(item_itemseq, 1, 2, 3)
 
 -- 후기(top3)
 
@@ -85,6 +89,16 @@ FROM item a
 INNER JOIN review b on a.itemSeq = b.item_itemseq
 WHERE 1=1
 AND a.itemSeq = "1"
+;
+
+-- 결제 
+SELECT
+	a.itMainImg
+    ,a.itMain
+    ,
+FROM item a
+INNER JOIN member b on a.member_mmSeq = b.mmSeq
+WHERE 1=1
 ;
 
 -- 구매 내역
