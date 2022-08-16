@@ -1,5 +1,11 @@
 use espresso;
 
+-- 한 회원의 여러 값을 표현하지 않음 slave table에 default NY를 통해 한개의 값만 보여지게 표현
+-- 서브쿼리의 사용(data를 한개를 가져올 경우 사용함), 두개 이상은 join 사용.
+-- 공통코드는 join을 걸지 않기.
+-- web --> Java(Spring) 5개 이상을 거침 --> DB를 거쳐서 다시 돌아옴(cash를 통해 가져옴). 
+-- 모든 데이터는 등록일, 수정일을 넣는다.
+
 -- 어떤 조건을 할지에 따라 마스터 table 설정을 잘 해야함. 
 -- 코드그룹:코드
 SELECT
@@ -21,10 +27,15 @@ WHERE mmEmail = "dongsu@naver.com" and mmPw = "dongsu123"
 
 -- 메인(인기 top4)
 SELECT 
-
+	breadcrumb
+    ,a.item_itemseq
+    ,count(a.item_itemseq)
 FROM purchase a
-ORDER BY FIELD(item_itemseq, 1, 2, 3)
-
+INNER JOIN item b on a.item_itemseq = b.itemSeq
+ORDER BY -- FIELD(item_itemseq, 1, 2, 3)
+a.item_itemseq asc
+;
+    
 -- 후기(top3)
 
 -- 판매자 인터뷰(top3)
@@ -36,8 +47,8 @@ SELECT
 	,b.mmNickname
     ,a.itMain
     ,a.basicPrice
-    ,(SELECT ROUND(AVG(reGrade)/2, 1) FROM review WHERE item_itemseq = "1") AS reviewAvgGrade
-    ,(SELECT COUNT(item_itemseq) FROM review WHERE item_itemseq = "1") AS reviewCount
+    ,ROUND(AVG(c.reGrade)/2, 1) AS reviewAvgGrade
+    ,COUNT(c.item_itemseq) AS reviewCount
 FROM item a
 INNER JOIN member b ON a.member_mmSeq = b.mmSeq
 INNER JOIN review c ON a.itemSeq = c.item_itemseq
@@ -50,8 +61,8 @@ GROUP BY a.itemSeq
 SELECT
 	a.breadcrumb
     ,a.itMainImg
-	,(SELECT ROUND(AVG(reGrade)/2, 1) FROM review WHERE item_itemseq = "1") AS reviewAvgGrade
-    ,(SELECT COUNT(item_itemseq) FROM review WHERE item_itemseq = "1") AS reviewCount
+	,ROUND(AVG(c.reGrade)/2, 1) AS reviewAvgGrade
+    ,COUNT(c.item_itemseq) AS reviewCount
     ,a.itServiceDetail
     ,a.basicPrice
     ,a.basicDetail
@@ -66,8 +77,8 @@ SELECT
     ,a.proBenefit
     ,a.proPeriod
     ,a.itCancleRefund
-    ,(SELECT ROUND(AVG(reGrade)/2, 1) FROM review WHERE item_itemseq = "1") AS reviewAvgGrade
-    ,(SELECT COUNT(item_itemseq) FROM review WHERE item_itemseq = "1") AS reviewCount
+    ,ROUND(AVG(c.reGrade)/2, 1) AS reviewAvgGrade
+    ,COUNT(c.item_itemseq) AS reviewCount
     ,a.itInquiry
 FROM item a
 INNER JOIN member b on a.member_mmSeq = b.mmSeq
@@ -92,14 +103,13 @@ AND a.itemSeq = "1"
 ;
 
 -- 결제 
-SELECT
-	a.itMainImg
-    ,a.itMain
-    ,
-FROM item a
-INNER JOIN member b on a.member_mmSeq = b.mmSeq
-WHERE 1=1
-;
+-- SELECT
+-- 	a.itMainImg
+--    ,a.itMain
+--    ,
+-- FROM item a
+-- INNER JOIN member b on a.member_mmSeq = b.mmSeq
+-- WHERE 1=1
 
 -- 구매 내역
 
