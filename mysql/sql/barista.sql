@@ -5,6 +5,7 @@ use espresso;
 -- 공통코드는 join을 걸지 않기.
 -- web --> Java(Spring) 5개 이상을 거침 --> DB를 거쳐서 다시 돌아옴(cash를 통해 가져옴). 
 -- 모든 데이터는 등록일, 수정일을 넣는다.
+-- group by ~ having ~ > 숫자 , order by
 
 -- 어떤 조건을 할지에 따라 마스터 table 설정을 잘 해야함. 
 -- 코드그룹:코드
