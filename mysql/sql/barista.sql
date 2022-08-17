@@ -7,7 +7,8 @@ use espresso;
 -- 모든 데이터는 등록일, 수정일을 넣는다.
 -- group by ~ having ~ > 숫자 , order by
 -- UNION(유니온): 데이터의 갯수와 타입이 같아야 함. 
--- 예시) 해당 월, 년도 별 집계 데이터 뽑을 때 사용함. 
+-- 예시) 해당 월, 년도 별 집계 데이터 뽑을 때 사용함.
+-- * UNION ALL 로 SELECT와 SELECT를 연결. 
 
 -- 어떤 조건을 할지에 따라 마스터 table 설정을 잘 해야함. 
 -- 코드그룹:코드
@@ -204,10 +205,10 @@ WHERE mmPw = ""
 
 -- UNION 연습
 SELECT
-    mmNickname
-    ,mmName
-FROM member 
-UNION
+    breadcrumb
+    ,itMain
+FROM item 
+UNION ALL
 SELECT
     reGrade
     ,reWorkload
