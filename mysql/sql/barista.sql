@@ -6,6 +6,8 @@ use espresso;
 -- web --> Java(Spring) 5개 이상을 거침 --> DB를 거쳐서 다시 돌아옴(cash를 통해 가져옴). 
 -- 모든 데이터는 등록일, 수정일을 넣는다.
 -- group by ~ having ~ > 숫자 , order by
+-- UNION(유니온): 데이터의 갯수와 타입이 같아야 함. 
+-- 예시) 해당 월, 년도 별 집계 데이터 뽑을 때 사용함. 
 
 -- 어떤 조건을 할지에 따라 마스터 table 설정을 잘 해야함. 
 -- 코드그룹:코드
@@ -82,7 +84,7 @@ SELECT
     ,COUNT(c.item_itemseq) AS reviewCount
     ,a.itInquiry
 FROM item a
-INNER JOIN member b on a.member_mmSeq = b.mmSeq
+-- INNER JOIN member b on a.member_mmSeq = b.mmSeq
 INNER JOIN review c on a.itemSeq = c.item_itemseq
 WHERE 1=1
 AND a.itemSeq = "1"
@@ -91,8 +93,9 @@ GROUP BY a.itemSeq
 
 -- 상품 후기
 SELECT
-    b.reNickname
-    ,b.reGrade
+	a.itemSeq
+    ,b.reNickname
+    ,ROUND(AVG(b.reGrade)/2, 1) AS AvgGrade
     ,b.reWriteTime
     ,b.reContent
     ,b.reWorkload
@@ -198,3 +201,15 @@ WHERE mmPw = ""
 -- 코멘트
 
 -- 프로젝트 관련 쿼리
+
+-- UNION 연습
+SELECT
+    mmNickname
+    ,mmName
+FROM member 
+UNION
+SELECT
+    reGrade
+    ,reWorkload
+FROM review
+;
