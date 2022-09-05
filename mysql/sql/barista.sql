@@ -20,10 +20,37 @@ use espresso;
 SELECT
 	a.ccgSeq
     ,a.ccgName
-    ,b.ccSeqcode
+    ,b.ccSeq
     ,b.ccName
 FROM codeGroup a
 inner join code b on b.codeGroup_ccgSeq = a.ccgSeq
+;
+
+-- 코드 갯수(GROUP BY)
+SELECT
+	a.ccgName
+    ,count(b.ccSeq)
+FROM codeGroup a
+JOIN code b on a.ccgseq = b.codeGroup_ccgSeq
+GROUP BY a.ccgName
+;
+
+-- 코드 갯수(SUB 쿼리)
+SELECT
+	ccgName
+    ,(SELECT
+		count(ccSeq)
+	FROM code
+    WHERE 1=1
+		AND ccgSeq = codeGroup_ccgSeq) AS ccCount
+FROM codeGroup
+;
+
+SELECT
+	a.*
+    ,a.mmSeq
+    ,a.mmNamemember
+FROM member a
 ;
 
 -- 로그인
