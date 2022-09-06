@@ -23,7 +23,7 @@ SELECT
     ,b.ccSeq
     ,b.ccName
 FROM codeGroup a
-inner join code b on b.codeGroup_ccgSeq = a.ccgSeq
+join code b on b.codeGroup_ccgSeq = a.ccgSeq
 ;
 
 -- 코드 갯수(GROUP BY)
