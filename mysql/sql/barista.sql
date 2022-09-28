@@ -53,6 +53,14 @@ SELECT
 FROM member a
 ;
 
+-- 회원가입
+
+
+-- 아이디 확인
+SELECT COUNT(*)
+FROM member WHERE 1=1
+;
+
 -- 로그인
 SELECT 
 	mmEmail
