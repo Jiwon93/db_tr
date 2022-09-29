@@ -26,6 +26,24 @@ FROM codeGroup a
 join code b on b.codeGroup_ccgSeq = a.ccgSeq
 ;
 
+SELECT
+	a.mmNickname
+	,a.mmEmail
+	,a.mmName
+	,a.mmBod
+	,b.mmpPhoneNumber
+	,a.mmGender
+	,a.mmZip
+	,a.mmAddress1
+	,a.mmAddress2
+	,a.mmJob
+	,a.mmInterest
+FROM member a
+JOIN member_phone b on a.mmSeq = b.member_mmSeq
+WHERE 1=1
+	AND a.mmSeq = 1
+	;
+
 -- 코드 갯수(GROUP BY)
 SELECT
 	a.ccgName
