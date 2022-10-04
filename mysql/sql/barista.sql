@@ -42,7 +42,18 @@ FROM member a
 JOIN member_phone b on a.mmSeq = b.member_mmSeq
 WHERE 1=1
 	AND a.mmSeq = 1
+    AND mmpDiv = 98
 	;
+    
+-- Email 찾기
+SELECT
+	a.*
+FROM member a
+JOIN member_phone b on a.mmSeq = b.member_mmSeq
+WHERE 1=1
+	AND mmName = "신지원"
+	AND mmpPhoneNumber = "01022222222"
+;
 
 -- 코드 갯수(GROUP BY)
 SELECT
