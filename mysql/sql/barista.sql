@@ -16,7 +16,7 @@ use espresso;
 -- 3단계. 업로드 테이블을 하나 생성해줌.
 
 -- 어떤 조건을 할지에 따라 마스터 table 설정을 잘 해야함. 
--- 코드그룹:코드
+-- 코드그룹:코드itemOption
 SELECT
 	a.ccgSeq
     ,a.ccgName
