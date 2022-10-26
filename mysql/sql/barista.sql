@@ -284,5 +284,27 @@ SELECT
 FROM review
 ;
 
+-- 구매목록
+SELECT
+	d.mmNickname
+	,b.itTitle
+	,c.itemPrice
+FROM purchase a
+JOIN item b on  a.item_itemSeq = b.itemSeq
+JOIN itemOption c on a.item_itemSeq = c.item_itemSeq
+JOIN member d on a.member_mmSeq = d.mmSeq
+WHERE 1=1
+	AND a.member_mmSeq = 11
+;
 
-
+-- 판매목록
+SELECT
+	a.itTitle
+	,c.itemPrice
+FROM item a
+JOIN member b on  a.member_mmSeq = b.mmSeq
+JOIN itemOption c on a.itemSeq = c.item_itemSeq
+WHERE 1=1
+	AND b.mmSeq = 10
+	AND b.mmRank = 20
+;
