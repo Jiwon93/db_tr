@@ -308,3 +308,51 @@ WHERE 1=1
 	AND b.mmSeq = 10
 	AND b.mmRank = 20
 ;
+
+-- 인덱스
+SHOW INDEX FROM member;
+
+-- CREATE INDEX abc ON member (mmDelNy);
+-- ALTER TABLE member DROP INDEX abc;
+
+-- view
+create view purchaseListV
+as
+SELECT 
+	d.mmNickname
+    ,b.itTitle
+    ,c.itemPrice
+FROM purchase a
+JOIN item b on a.item_itemSeq = b.itemSeq
+JOIN itemOption c on a.item_itemSeq = c.item_itemSeq
+JOIN member d on a.member_mmSeq = d.mmSeq
+WHERE 1=1
+	AND a.member_mmSeq = 10
+;
+
+-- trigger
+
+-- SET GLOBAL log_bin_trust_function_creators = 1;
+
+-- function
+ DELIMITER $$
+ CREATE FUNCTION getName (
+ seq int
+ ) 
+ RETURNS varchar(100)
+ BEGIN
+ 
+  declare rtName varchar(100);
+
+select
+	mmName into rtName
+from
+	member
+ where 1=1
+	and mmSeq = seq
+ ;
+ 
+ RETURN rtName;
+ END$$
+ DELIMITER ;
+ 
